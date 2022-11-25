@@ -31,7 +31,7 @@ class local_enrolnotify_observer {
     public static function user_enrolment_created(\core\event\user_enrolment_created $event) {
         global $USER, $DB, $CFG;
 
-        if(get_config('local_enrolnotify','enableplugin') == '1' && $event->relateduserid == 2994){ //-prototipo: mando la mail solo all'utente mattia.mele
+        if(get_config('local_enrolnotify','enableplugin') == '1'){ 
             $userEnrolled = $DB->get_record('user',['id' => $event->relateduserid]);
             $course = $DB->get_record('course',['id' => $event->courseid]);
 
