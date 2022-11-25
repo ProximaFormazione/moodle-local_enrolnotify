@@ -22,6 +22,7 @@
  */
 
 require_once($CFG->libdir.'/moodlelib.php');
+require_once($CFG->dirroot . '/local/enrolnotify/classes/placeholder_replacer.php');
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -33,9 +34,11 @@ class local_enrolnotify_observer {
         if(get_config('local_enrolnotify','enableplugin') == '1' && $event->relateduserid == 2994){ //-prototipo: mando la mail solo all'utente mattia.mele
             $userEnrolled = $DB->get_record('user',['id' => $event->relateduserid]);
             $course = $DB->get_record('course',['id' => $event->courseid]);
+
+            $placeholderreplacer = new local_enrolnotify_placeholder_replacer($userEnrolled,$course);
             
-            $mailSubject = get_config('local_enrolnotify','defaultsubject');
-            $mailBody = get_config('local_enrolnotify','defaultmessage');
+            $mailSubject = $placeholderreplacer->Process_text(get_config('local_enrolnotify','defaultsubject'));
+            $mailBody = $placeholderreplacer->Process_text(get_config('local_enrolnotify','defaultmessage'));
             $from = $CFG->noreplyaddress;
 
             email_to_user($userEnrolled,$from,$mailSubject,$mailBody,$mailBody);

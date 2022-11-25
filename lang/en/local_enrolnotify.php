@@ -32,3 +32,15 @@ $string['config_defaultsubject_default'] = 'Course enrolment';
 $string['config_defaultmessage'] = 'Default message';
 $string['config_defaultmessage_desc'] = 'Default message for new rules';
 $string['config_defaultmessage_default'] = 'You have been enrolled in a course';
+$string['placeholder_description']= 'you can insert placeholders in the body and/or subject with the syntax <code>{{PROPERTY}}</code>. (mind the double brackets)<br>
+some of the properties enabled:<br>
+<code>{{user.firstname}}</code> User Firstname
+<code>{{user.lastname}}</code> User Lastname<br>
+<code>{{user.email}}</code> User EMail<br>
+<code>{{user.username}}</code> Username<br>
+<code>{{course.fullname}}</code> Full name of the course<br>
+<code>{{course.url}}</code> Course url without protocol ("http://")<br>
+<code>{{course.id}}</code> Course Id (useful to make urls)<br>
+<code>{{siteurl}}</code>  Base site url without protocol ("http://")<br>
+Protocol is omitted becaue it gets added by the editor when you insert links<br>
+All other properties of user and course entities are likewise accessible, refer to Moodle dev documentation for a full list';

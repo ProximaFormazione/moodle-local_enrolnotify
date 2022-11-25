@@ -32,3 +32,15 @@ $string['config_defaultsubject_default'] = 'Iscrizione corso';
 $string['config_defaultmessage'] = 'Messaggio di default';
 $string['config_defaultmessage_desc'] = 'Messaggio base per le nuove regole';
 $string['config_defaultmessage_default'] = 'Sei stata/o iscritta/o ad un corso';
+$string['placeholder_description']= 'Puoi inserire dati contestuali nel messaggio e/o nel soggetto usando la sintassi <code>{{PROPERTY}}</code>. (occhio alle doppie parentesi)<br>
+Alcune delle propieta\' abilitate:<br>
+<code>{{user.firstname}}</code> Nome Utente<br>
+<code>{{user.lastname}}</code> Cognome Utente<br>
+<code>{{user.email}}</code> Email dell\' Utente<br>
+<code>{{user.username}}</code> Username Utente<br>
+<code>{{course.fullname}}</code> Nome lungo del corso<br>
+<code>{{course.url}}</code> Url del corso senza il protocollo (tipo "http://")<br>
+<code>{{course.id}}</code> Id del corso (utile per creare url)<br>
+<code>{{siteurl}}</code> Url base del sito senza il protocollo (tipo "http://")<br>
+il protocollo e\' omesso dalle url perche\' se fate un link moodle lo aggiunge<br>
+Sono similmente accessibili anche tutte le altre propieta\' delle tabelle base, consultare la documentazione ufficiale Moodle per una lista completa';

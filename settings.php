@@ -53,13 +53,16 @@ if ($hassiteconfig) {
     //get_string('config_defaultmessage_default', 'local_enrolnotify')
     ));
 
-    $url_newkey =  new moodle_url('/local/enrolnotify/rules.php');
-    $linkname = get_string('config_gotoindex', 'local_enrolnotify');
-    $button = new single_button($url_newkey, $linkname, 'get', true);
+    $settings->add(new admin_setting_description('local_enrolnotify/placeholdertutorial','',get_string('placeholder_description', 'local_enrolnotify')));
+
+    //- this stopped working, would be nice to fix it eventually
+    // $url_newkey =  new moodle_url('/local/enrolnotify/rules.php');
+    // $linkname = get_string('config_gotoindex', 'local_enrolnotify');
+    // $button = new single_button($url_newkey, $linkname, 'get', true);
 
     $settings->add(new admin_setting_description('local_enrolnotify/gotoindex',
     '',
-    '<br>'.$OUTPUT->render($button)
-    //'<br><p><a href="'.new moodle_url('/local/enrolnotify/rules.php').'">'.get_string('config_gotoindex', 'local_enrolnotify').'</a></p><br>'
+    //'<br><form>'.$OUTPUT->render($button).'</form>'
+    '<br><p><a href="'.new moodle_url('/local/enrolnotify/rules.php').'"><strong> >>'.get_string('config_gotoindex', 'local_enrolnotify').'</strong></a></p><br>'
     ));
 }
