@@ -23,3 +23,12 @@
 
 
 $string['pluginname'] = 'Notificatore iscrizioni';
+$string['config_enableplugin'] = 'Attiva Plugin';
+$string['config_enableplugin_desc'] = 'Attiva o disattiva tutte le notifiche';
+$string['config_gotoindex'] = 'Vai ai settaggi di regole e messaggi';
+$string['config_defaultsubject'] = 'Oggetto di default';
+$string['config_defaultsubject_desc'] = 'Oggetto iniziale nella maschera per le nuove regole';
+$string['config_defaultsubject_default'] = 'Iscrizione corso';
+$string['config_defaultmessage'] = 'Messaggio di default';
+$string['config_defaultmessage_desc'] = 'Messaggio base per le nuove regole';
+$string['config_defaultmessage_default'] = 'Sei stata/o iscritta/o ad un corso';

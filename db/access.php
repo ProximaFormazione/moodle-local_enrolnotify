@@ -21,10 +21,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();         
+defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_enrolnotify';
-$plugin->version = 2022112401;
-
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release   = "0.2";
+$capabilities = [
+    'local/enrolnotify:editrules' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes' => [
+            'manager' => CAP_ALLOW
+        ],
+    ]
+];

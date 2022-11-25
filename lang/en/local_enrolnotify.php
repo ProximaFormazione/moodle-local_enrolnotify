@@ -23,3 +23,12 @@
 
 
 $string['pluginname'] = 'Enrol Notifier';
+$string['config_enableplugin'] = 'Enable Plugin';
+$string['config_enableplugin_desc'] = 'Enable or deactivate all notifications';
+$string['config_gotoindex'] = 'Go to rule and message settings';
+$string['config_defaultsubject'] = 'Default subject';
+$string['config_defaultsubject_desc'] = 'Default subject for new rules';
+$string['config_defaultsubject_default'] = 'Course enrolment';
+$string['config_defaultmessage'] = 'Default message';
+$string['config_defaultmessage_desc'] = 'Default message for new rules';
+$string['config_defaultmessage_default'] = 'You have been enrolled in a course';

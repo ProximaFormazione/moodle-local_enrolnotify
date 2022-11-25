@@ -28,16 +28,20 @@ defined('MOODLE_INTERNAL') || die();
 class local_enrolnotify_observer {
 
     public static function user_enrolment_created(\core\event\user_enrolment_created $event) {
-        global $USER, $DB;
+        global $USER, $DB, $CFG;
 
-        
-        $userEnrolled = $DB->get_record('user',['id' => $event->relateduserid]);
-        if($userEnrolled->id == 2994){
+        if(get_config('local_enrolnotify','enableplugin') == '1' && $event->relateduserid == 2994){ //-prototipo: mando la mail solo all'utente mattia.mele
+            $userEnrolled = $DB->get_record('user',['id' => $event->relateduserid]);
+            $course = $DB->get_record('course',['id' => $event->courseid]);
+            
+            $mailSubject = get_config('local_enrolnotify','defaultsubject');
+            $mailBody = get_config('local_enrolnotify','defaultmessage');
+            $from = $CFG->noreplyaddress;
 
-            email_to_user($userEnrolled,$USER,'Enrollment Notification','The text of the message','questo e\' un prototoipo');
+            email_to_user($userEnrolled,$from,$mailSubject,$mailBody,$mailBody);
+
+            return true;
         }
-
-        return true;
     }
 
 } 

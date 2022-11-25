@@ -21,10 +21,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();         
+require_once('../../config.php');
 
-$plugin->component = 'local_enrolnotify';
-$plugin->version = 2022112401;
+require_login();
 
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release   = "0.2";
+$context = context_system::instance();
+require_capability('local/enrolnotify:editrules',$context);
+
+echo 'Work in progress';
