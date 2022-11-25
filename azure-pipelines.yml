@@ -1,0 +1,45 @@
+trigger: none
+name: $(Build.Repository.Name) $(Version)
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- name: pluginname
+  value: enrolnotify
+
+steps:
+
+- task: CmdLine@2
+  condition: eq(variables.Version, 0)
+  inputs:
+    script: 'exit 1'
+
+- task: CmdLine@2
+  inputs:
+    script: 'rm -r $(Build.Repository.LocalPath)/.git'
+
+- task: CmdLine@2
+  inputs:
+    script: 'rm -r $(Build.Repository.LocalPath)/azure-pipelines.yml'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.Repository.LocalPath)'
+    Contents: '**'
+    TargetFolder: '$(Build.Repository.LocalPath)/dir/$(pluginname)'
+
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.Repository.LocalPath)/dir'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/dir/$(Build.Repository.Name)_$(Version).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/dir'
+    ArtifactName: 'Plugin'
+    publishLocation: 'Container'
