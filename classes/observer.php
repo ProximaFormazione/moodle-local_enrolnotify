@@ -23,6 +23,7 @@
 
 require_once($CFG->libdir.'/moodlelib.php');
 require_once($CFG->dirroot . '/local/enrolnotify/classes/placeholder_replacer.php');
+require_once($CFG->dirroot . '/local/enrolnotify/classes/rulebiz.php');
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -32,16 +33,77 @@ class local_enrolnotify_observer {
         global $USER, $DB, $CFG;
 
         if(get_config('local_enrolnotify','enableplugin') == '1'){ 
+            //- Get the relevant entities
             $userEnrolled = $DB->get_record('user',['id' => $event->relateduserid]);
             $course = $DB->get_record('course',['id' => $event->courseid]);
+            $cohorts = cohort_get_user_cohorts($event->relateduserid);
+            $categoriespath = $DB->get_record('course_categories',['id' => $course->category],'path');
+            $categories = explode( '/',$categoriespath->path);
+            array_shift($categories); //-first element is empty string
 
-            $placeholderreplacer = new local_enrolnotify_placeholder_replacer($userEnrolled,$course);
+            $rulesbiz = new local_enrolnotify_rulebiz();
+
+            $rulesarray = $rulesbiz->get_all_rules_wo_msg();
+
+            $subjecttouse = null;
+            $bodytouse = null;
+            $fromtouse = null;
+            $sendnotification = false;
+
+            if(empty($rulesarray)){
+                $subjecttouse = get_config('local_enrolnotify','defaultsubject');
+                $bodytouse = get_config('local_enrolnotify','defaultmessage');
+                $fromtouse = $CFG->noreplyaddress;
+                $sendnotification = true;
+            }
+            else{
+                foreach ($rulesarray as $rule) {
+
+                    //- rule logic check: if a rule has multiple elements they are linked logically by an AND
+                    $rulelogiccheck = ($rule->userid == null || $rule->userid == $userEnrolled->id) 
+                        && ($rule->courseid == null || $rule->userid == $course->id) 
+                        && ($rule->cohortid == null || in_array($rule->cohortid,$cohorts)) 
+                        && ($rule->categoryid == null || in_array($rule->categoryid,$categories)) ;
+
+                    if($rulelogiccheck){
+                        if($rule->donotnotify == 1){
+                            return; //-if rules matches ans has this flag then no notification must be sent
+                        }
+
+                        $sendnotification = true;
+
+                        //-getting message details (it's an html might be heavy, so I just get it here)
+                        $msgdetails = $rulesbiz->get_rule_message_by_id($rule->id);
+
+                        $subjecttouse = $msgdetails->mailsubject;
+                        $bodytouse = $msgdetails->message;
+                        $fromtouse = $msgdetails->fromfield;
+
+                        //-if some fileds are not set I use default values
+                        if (empty($subjecttouse)){
+                            $subjecttouse = get_config('local_enrolnotify','defaultsubject');
+                        }
+                        if(empty($bodytouse)){
+                            $bodytouse = get_config('local_enrolnotify','defaultmessage');
+                        }
+                        if(empty($fromtouse)){
+                            $fromtouse = $CFG->noreplyaddress;
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            if($sendnotification){
+                $placeholderreplacer = new local_enrolnotify_placeholder_replacer($userEnrolled,$course);
             
-            $mailSubject = $placeholderreplacer->Process_text(get_config('local_enrolnotify','defaultsubject'));
-            $mailBody = $placeholderreplacer->Process_text(get_config('local_enrolnotify','defaultmessage'));
-            $from = $CFG->noreplyaddress;
-
-            email_to_user($userEnrolled,$from,$mailSubject,$mailBody,$mailBody);
+                $mailSubject = $placeholderreplacer->Process_text($subjecttouse);
+                $mailBody = $placeholderreplacer->Process_text($bodytouse);
+                $from = $placeholderreplacer->Process_text($fromtouse);
+    
+                //email_to_user($userEnrolled,$from,$mailSubject,$mailBody,$mailBody)
+            }
 
             return true;
         }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/enrolnotify/db" VERSION="20221202" COMMENT="XMLDB file for Moodle local/enrolnotify"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_enrolnotify_rule" COMMENT="rules for notifications in local_enrolnotify">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="priority" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="the lowest the number the higher the priority for this rue is. Only the highest priority matching rule will be applied"/>
+        <FIELD NAME="donotnotify" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="if this flag is enabled, when this rule is applied no notification is sent"/>
+        <FIELD NAME="mailsubject" TYPE="char" LENGTH="256" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="message" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="fromfield" TYPE="char" LENGTH="512" NOTNULL="false" SEQUENCE="false" COMMENT="if set, will be used for the from filed in the mail message"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, this rule applies only to the specific user"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, the rule will apply only to the specific course"/>
+        <FIELD NAME="categoryid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, rule will apply only to the selected course category"/>
+        <FIELD NAME="cohortid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="If set, rule will apply only to the specified cohort"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="i_priority" UNIQUE="true" FIELDS="priority" COMMENT="this guarantees no two rules have the same priority"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
