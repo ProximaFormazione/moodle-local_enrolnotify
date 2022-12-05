@@ -32,7 +32,7 @@ $string['config_defaultsubject_default'] = 'Iscrizione corso';
 $string['config_defaultmessage'] = 'Messaggio di default';
 $string['config_defaultmessage_desc'] = 'Messaggio base per le nuove regole';
 $string['config_defaultmessage_default'] = 'Sei stata/o iscritta/o ad un corso';
-$string['placeholder_description']= 'Puoi inserire dati contestuali nel messaggio e/o nel soggetto usando la sintassi <code>{{PROPERTY}}</code>. (occhio alle doppie parentesi)<br>
+$string['placeholder_description']= 'Puoi inserire dati contestuali usando la sintassi <code>{{PROPERTY}}</code>. (occhio alle doppie parentesi)<br>
 Alcune delle propieta\' abilitate:<br>
 <code>{{user.firstname}}</code> Nome Utente<br>
 <code>{{user.lastname}}</code> Cognome Utente<br>
@@ -44,3 +44,33 @@ Alcune delle propieta\' abilitate:<br>
 <code>{{siteurl}}</code> Url base del sito senza il protocollo (tipo "http://")<br>
 il protocollo e\' omesso dalle url perche\' se fate un link moodle lo aggiunge<br>
 Sono similmente accessibili anche tutte le altre propieta\' delle tabelle base, consultare la documentazione ufficiale Moodle per una lista completa';
+$string['rule_categoryid'] = 'Solo se categoria';
+$string['rule_cohortid'] = 'Solo se coorte';
+$string['rule_courseid'] = 'Solo se corso';
+$string['rule_donotnotify'] = 'Non inviare notifica se regola applicabile';
+$string['rule_fromfield'] = 'Indirizzo posta mittente';
+$string['rule_mailsubject'] = 'Oggetto mail';
+$string['rule_message'] = 'Corpo del messaggio mail';
+$string['rule_priority'] = 'Ordinale regola';
+$string['rule_userid'] = 'Solo se user id';
+$string['ruleform_priority_description'] = 'L\'ordinale serve solo per stabilire la priorita\' della regola, piu\' e\' basso, piu\' la regola e\' prioritaria. Non possono esserci due regole con lo stesso ordinale. Si consiglia di non usare ordinali consecutivi per semplificare l\'inserimento tra piu\' regole. Se lasciato vuoto la regola verra\' inserita in fondo';
+$string['ruleform_rules_title'] = 'Criteri della regola, i campi non compilati non verranno controllati';
+$string['ruleform_maildetails_title'] = 'Dettagli della notifica, i campi non compilati saranno sostituiti dai valori di default';
+$string['ruleeditpage_header'] = 'Edit regola';
+$string['rulespage_add_rule'] = 'Aggiungi regola';
+$string['rulespage_colheader_rule'] = 'Regola';
+$string['rulespage_delete_rule'] = 'Elimina regola';
+$string['rulespage_disclaimerelse'] = 'Se nessuna regola e\' applicabile non verra\' inviata notifica';
+$string['rulespage_elselabel'] = 'Altrimenti';
+$string['rulespage_explanation'] = 'Ogni regola ha il suo messaggio personalizzato';
+$string['rulespage_header'] = 'Regole di notifica';
+$string['rulespage_norules'] = 'Nessuna regola settata. Le notifiche verranno inviate a tutti usando il messaggio standard';
+$string['rulespage_title'] = 'Regole messaggi personalizzati';
+$string['rulestring_and'] = 'e';
+$string['rulestring_category'] = 'la categoria del corso e\' <strong>{$a}</strong>';
+$string['rulestring_cohort'] = 'la coorte dell\'utente e\' <strong>{$a}</strong>';
+$string['rulestring_course'] = 'il corso e\' <strong>{$a}</strong>';
+$string['rulestring_donotnotify'] = '<strong>Non mandare notifica</strong>';
+$string['rulestring_if'] = 'Se';
+$string['rulestring_noconditions'] = 'per qualsiasi iscrizione';
+$string['rulestring_user'] = 'l\'utente e\' <strong>{$a->firstname} {$a->lastname}</strong>';

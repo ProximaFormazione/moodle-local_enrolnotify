@@ -32,7 +32,7 @@ $string['config_defaultsubject_default'] = 'Course enrolment';
 $string['config_defaultmessage'] = 'Default message';
 $string['config_defaultmessage_desc'] = 'Default message for new rules';
 $string['config_defaultmessage_default'] = 'You have been enrolled in a course';
-$string['placeholder_description']= 'you can insert placeholders in the body and/or subject with the syntax <code>{{PROPERTY}}</code>. (mind the double brackets)<br>
+$string['placeholder_description']= 'you can insert placeholders with the syntax <code>{{PROPERTY}}</code>. (mind the double brackets)<br>
 some of the properties enabled:<br>
 <code>{{user.firstname}}</code> User Firstname
 <code>{{user.lastname}}</code> User Lastname<br>
@@ -44,3 +44,33 @@ some of the properties enabled:<br>
 <code>{{siteurl}}</code>  Base site url without protocol ("http://")<br>
 Protocol is omitted becaue it gets added by the editor when you insert links<br>
 All other properties of user and course entities are likewise accessible, refer to Moodle dev documentation for a full list';
+$string['rule_categoryid'] = 'Only if category';
+$string['rule_cohortid'] = 'Only if cohort';
+$string['rule_courseid'] = 'Only if course';
+$string['rule_donotnotify'] = 'Do not send notification if rules applies';
+$string['rule_fromfield'] = 'Sender message';
+$string['rule_mailsubject'] = 'Mail subject';
+$string['rule_message'] = 'Mail body';
+$string['rule_priority'] = 'Rule order value (better if not consecutives)';
+$string['rule_userid'] = 'Only if user id';
+$string['ruleform_priority_description'] = 'Priority of the rule, the lower is is the more important. There cannot be two rules with the same priority. It is advised to not use consecutive numbers to facilitate insertions of new rules. If left blank the new rule will be added at the bottom';
+$string['ruleform_rules_title'] = 'Rule criterions, blank fields won\'t be checked';
+$string['ruleform_maildetails_title'] = 'Notification details, if blank the default will be used';
+$string['ruleeditpage_header'] = 'Rule edit';
+$string['rulespage_add_rule'] = 'Add rule';
+$string['rulespage_colheader_rule'] = 'Rule';
+$string['rulespage_delete_rule'] = 'Delete rule';
+$string['rulespage_disclaimerelse'] = 'If no rules matches no notification will be sent';
+$string['rulespage_elselabel'] = 'Else';
+$string['rulespage_explanation'] = 'Each rule has its own personalised message';
+$string['rulespage_header'] = 'Notification rules';
+$string['rulespage_norules'] = 'No rules set. Notifications will be sent for all users with the default message';
+$string['rulespage_title'] = 'Custom message rules';
+$string['rulestring_and'] = 'and';
+$string['rulestring_category'] = 'course category is <strong>{$a}</strong>';
+$string['rulestring_cohort'] = 'user cohort is <strong>{$a}</strong>';
+$string['rulestring_course'] = 'course is <strong>{$a}</strong>';
+$string['rulestring_donotnotify'] = '<strong>Do not notify</strong>';
+$string['rulestring_if'] = 'If';
+$string['rulestring_noconditions'] = 'for any enrollment';
+$string['rulestring_user'] = 'user is <strong>{$a->firstname} {$a->lastname}</strong>';
