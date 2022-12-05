@@ -35,7 +35,7 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_configselect('local_enrolnotify/enableplugin',
     get_string('config_enableplugin', 'local_enrolnotify'),
     get_string('config_enableplugin_desc', 'local_enrolnotify'),
-    array('value' => 1), $yesno));
+    array('value' => 0), $yesno));
 
     $settings->add(new admin_setting_configtext_with_maxlength('local_enrolnotify/defaultsubject',
     get_string('config_defaultsubject', 'local_enrolnotify'),

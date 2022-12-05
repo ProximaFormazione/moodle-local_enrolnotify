@@ -28,4 +28,91 @@ require_login();
 $context = context_system::instance();
 require_capability('local/enrolnotify:editrules',$context);
 
-echo 'Work in progress';
+require_once ($CFG->dirroot.'/local/enrolnotify/classes/rulebiz.php');
+
+$biz = new local_enrolnotify_rulebiz();
+
+$extraction = $biz->get_all_rules_wo_msg();
+
+$datagrid = new html_table();
+$datagrid->head = [
+    '#'
+    ,' '
+    ,get_string('rulespage_colheader_rule','local_enrolnotify')
+    ,' '
+];
+
+//-variables to get first and last element
+$firstrowdone = false;
+$i = 0;
+foreach($extraction as $record){
+
+    if($firstrowdone){
+        $url_up =  new moodle_url('/local/enrolnotify/ruleedit.php',['mode'=>'moveup','id'=>$record->id]);
+        $linkname_up = $OUTPUT->pix_icon('i/up','^');
+        $upbutton = html_writer::tag('a',$linkname_up,['href'=>$url_up]); 
+
+        $uparrow = $upbutton;
+        $elselabel = get_string('rulespage_elselabel','local_enrolnotify').' ';
+    }
+    else{
+        $uparrow = '';
+        $elselabel = '';
+        $firstrowdone = true;
+    }
+
+    if(++$i === count($extraction)) {
+        $downarrow = '';
+    }
+    else{
+        $url_down =  new moodle_url('/local/enrolnotify/ruleedit.php',['mode'=>'movedown','id'=>$record->id]);
+        $linkname_down = $OUTPUT->pix_icon('i/down','v');
+        $downbutton = html_writer::tag('a',$linkname_down,['href'=>$url_down]); 
+
+        $downarrow = $downbutton;
+    }
+
+    $url =  new moodle_url('/local/enrolnotify/ruleedit.php',['mode'=>'edit','id'=>$record->id]);
+    $linkname = get_string('edit');
+    $editbutton = new single_button($url, $linkname, 'get', true);
+
+    $row =  [
+        $record->priority
+        ,$uparrow.$downarrow 
+        ,$elselabel.$biz->get_rule_explained($record)
+        ,$OUTPUT->render($editbutton)
+    ];
+
+    $datagrid->data[] = $row;
+}
+
+
+$pageurl = new moodle_url('/local/enrolnotify/rules.php');
+
+$PAGE->set_pagelayout('standard');
+$PAGE->set_url($pageurl);
+$PAGE->set_title(get_string('rulespage_header', 'local_enrolnotify'));
+$PAGE->set_heading(get_string('rulespage_header','local_enrolnotify'));
+
+//------------------RENDERING--------------------------------
+
+echo $OUTPUT->header();
+
+echo html_writer::tag('h2',get_string('rulespage_title', 'local_enrolnotify'));
+echo html_writer::tag('p',get_string('rulespage_explanation', 'local_enrolnotify'));
+
+if(empty($extraction)){
+    echo html_writer::tag('p',get_string('rulespage_norules', 'local_enrolnotify'));
+}
+else{
+    echo html_writer::table($datagrid);  
+    echo html_writer::tag('p',get_string('rulespage_disclaimerelse', 'local_enrolnotify'));
+}
+
+$url =  new moodle_url('/local/enrolnotify/ruleedit.php',['mode'=>'add']);
+$linkname = get_string('rulespage_add_rule', 'local_enrolnotify');
+$editbutton = new single_button($url, $linkname, 'get', true);
+
+echo $OUTPUT->render($editbutton);
+
+echo $OUTPUT->footer();

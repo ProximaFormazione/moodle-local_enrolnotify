@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();         
 
 $plugin->component = 'local_enrolnotify';
-$plugin->version = 2022120203;
+$plugin->version = 2022120503;
 
 $plugin->maturity = MATURITY_BETA;
-$plugin->release   = "0.1.1";
+$plugin->release   = "0.9";
