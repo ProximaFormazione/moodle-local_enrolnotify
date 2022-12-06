@@ -30,13 +30,13 @@ defined('MOODLE_INTERNAL') || die();
 class local_enrolnotify_observer {
 
     public static function user_enrolment_created(\core\event\user_enrolment_created $event) {
-        global $USER, $DB, $CFG;
+        global $DB, $CFG;
 
         if(get_config('local_enrolnotify','enableplugin') == '1'){ 
             //- Get the relevant entities
             $userEnrolled = $DB->get_record('user',['id' => $event->relateduserid]);
             $course = $DB->get_record('course',['id' => $event->courseid]);
-            $cohorts = cohort_get_user_cohorts($event->relateduserid);
+            $cohorts = array_keys(cohort_get_user_cohorts($event->relateduserid));
             $categoriespath = $DB->get_record('course_categories',['id' => $course->category],'path');
             $categories = explode( '/',$categoriespath->path);
             array_shift($categories); //-first element is empty string
