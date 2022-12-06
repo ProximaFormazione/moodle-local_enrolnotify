@@ -102,7 +102,7 @@ class local_enrolnotify_observer {
                 $mailBody = $placeholderreplacer->Process_text($bodytouse);
                 $from = $placeholderreplacer->Process_text($fromtouse);
     
-                //email_to_user($userEnrolled,$from,$mailSubject,$mailBody,$mailBody)
+                email_to_user($userEnrolled,$from,$mailSubject,$mailBody,$mailBody);
             }
 
             return true;
