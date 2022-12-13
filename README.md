@@ -15,14 +15,15 @@ you can configure the plugin from *Site Administration > Plugins > Local Plugin 
 There it's possible to set the default message and subject of the notification mail. You can use placeholders for details pertaining to the enrolment like student or course name. Placeholders are enclosed by a double curly bracket
 
 some of the properties enabled:
-`{{user.firstname}}` User Firstname
-`{{user.lastname}}` User Lastname
-`{{user.email}}` User EMail
-`{{user.username}}` Username
-`{{course.fullname}}` Full name of the course
-`{{course.url}}` Course url without protocol ("http://")
-`{{course.id}}` Course Id (useful to make urls)
-`{{siteurl}}`  Base site url without protocol ("http://")
+
+* `{{user.firstname}}` User Firstname
+* `{{user.lastname}}` User Lastname
+* `{{user.email}}` User EMail
+* `{{user.username}}` Username
+* `{{course.fullname}}` Full name of the course
+* `{{course.url}}` Course url without protocol ("http://")
+* `{{course.id}}` Course Id (useful to make urls)
+* `{{siteurl}}`  Base site url without protocol ("http://")
 
 Protocol is omitted becaue it gets added by the editor when you insert links. For course and user every other database column is also accessible (should you need any of them for a reason).
 
