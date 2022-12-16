@@ -63,7 +63,7 @@ class local_enrolnotify_ruleform extends moodleform {
 
         $coursearr = [0=>''];
         foreach($this->courses as $id=>$course){
-            $coursearr[$id] = $id.' - '.$course->shortname.' - '.$course->fullname;
+            $coursearr[$id] = $course->fullname.' - '.$course->shortname.' - id='.$id;
         }
         $mform->addElement('select', 'courseid',get_string('rule_courseid','local_enrolnotify'),$coursearr);
         $mform->setType('courseid', PARAM_INT); 

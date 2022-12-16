@@ -61,7 +61,7 @@ class local_enrolnotify_observer {
 
                     //- rule logic check: if a rule has multiple elements they are linked logically by an AND
                     $rulelogiccheck = ($rule->userid == null || $rule->userid == $userEnrolled->id) 
-                        && ($rule->courseid == null || $rule->userid == $course->id) 
+                        && ($rule->courseid == null || $rule->courseid == $course->id) 
                         && ($rule->cohortid == null || in_array($rule->cohortid,$cohorts)) 
                         && ($rule->categoryid == null || in_array($rule->categoryid,$categories)) ;
 
